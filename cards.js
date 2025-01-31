@@ -6,14 +6,19 @@ function extraireMotsAleatoires(listeMots) {
     for (let i = 0; i < 5; i++) {
         if (listeMots.length > 0) {
             let indexAleatoire = Math.floor(Math.random() * listeMots.length);
-            nouvelleListe.push(listeMots[indexAleatoire]); // Ajouter le mot à la nouvelle liste
-            listeMots.splice(indexAleatoire, 1); // Supprimer le mot de la liste initiale
+            nouvelleListe.push(listeMots[indexAleatoire]); // Ajoute le mot à la nouvelle liste
+            listeMots.splice(indexAleatoire, 1); // Supprime le mot de la liste initiale
         }
     }
     return nouvelleListe;
 }
 
-// Exemple d'utilisation
-let listeExtraite = extraireMotsAleatoires(mots);
+/*
+for(let i = 0; i < 13; i++) {
+    let listeExtraite = extraireMotsAleatoires(mots);
+    console.log("Nouvelle liste de 5 mots :", listeExtraite);
+    console.log(mots.length)
+}
+*/
 
-console.log("Nouvelle liste de 5 mots :", listeExtraite);
+
