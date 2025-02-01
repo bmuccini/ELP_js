@@ -37,8 +37,8 @@ async function players(wordToGuess, player){
 }
 
 //fonction auto executée qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
-(async () => {
-  let clues = await players("marron", "Joueur 1");
+async function verifIndices (clues) {
+  //let clues = await players("marron", "Joueur 1");
   let final_clues = [];
   let indexes = [];
   for (let i = 0; i < clues.length; i++){
@@ -56,7 +56,9 @@ async function players(wordToGuess, player){
     }
   }
   
-  console.log(`Les indices de tous les joueurs sont : ${final_clues}`);
-})();
+  //console.log(`Les indices de tous les joueurs sont : ${final_clues}`);
+  return final_clues;
+}
+
 
 
