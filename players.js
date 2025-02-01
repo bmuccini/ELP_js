@@ -5,6 +5,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+//fonction pour demander l'input d'un joueur
 function askClue(){
   return new Promise((resolve, reject) => {
     rl.question(`Quel est ton indice ? `, clue => {
@@ -13,6 +14,7 @@ function askClue(){
   });
   }
 
+//fonction asynchrone pour demander aux joueurs à tour de role leur indice
 async function players(wordToGuess, player){
     let indices = [];
     const players = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
@@ -34,19 +36,27 @@ async function players(wordToGuess, player){
     return indices;
 }
 
+//fonction auto executée qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
 (async () => {
   let clues = await players("marron", "Joueur 1");
+  let final_clues = [];
+  let indexes = [];
   for (let i = 0; i < clues.length; i++){
     for (let j = 0; j < clues.length; j++){
       if (i != j){
         if (clues[i] == clues[j]){
-          clues.splice(i,1);
-          //clues.splice(j,1);
+          indexes.push(i);
         }
       }
     }
   }
-  console.log(`Les indices de tous les joueurs sont : ${clues}`);
+  for (let p = 0; p < clues.length; p++){
+    if (!indexes.includes(p)){
+      final_clues.push(clues[p]);
+    }
+  }
+  
+  console.log(`Les indices de tous les joueurs sont : ${final_clues}`);
 })();
 
 
