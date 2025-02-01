@@ -55,10 +55,10 @@ async function verifIndices (clues) {
       final_clues.push(clues[p]);
     }
   }
-  
+
   //console.log(`Les indices de tous les joueurs sont : ${final_clues}`);
   return final_clues;
 }
 
-
+module.exports = { players, verifIndices };
 
