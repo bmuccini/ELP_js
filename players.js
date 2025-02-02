@@ -32,7 +32,7 @@ async function players(wordToGuess, player){
         indices.push(clue);
         };
     
-    rl.close();
+    //rl.close();
     return indices;
 }
 
