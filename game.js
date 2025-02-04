@@ -19,6 +19,10 @@ const questionAsync = (question) => {
     });
 };
 
+function clearConsole() {
+    process.stdout.write('\x1Bc');
+}
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -28,7 +32,6 @@ function shuffleArray(array) {
 };
 
 
-// Fonction principale
 async function startGame(currentPlayer) {
     try{
 
@@ -57,9 +60,15 @@ async function startGame(currentPlayer) {
 
         // 2. Filtrer les indices en double
         let indicesFiltres = await verifIndices(indices);
+        
+        // Clear console before showing filtered indices
+        clearConsole();
 
         // 3. Afficher les indices finaux après filtrage
+        console.log("\n------------------------------------------");
+        console.log(`Tour de ${currentPlayer}`);
         console.log("\nIndices finaux après filtrage :", indicesFiltres);
+        
 
         // 5. Input -- Demande au joueur le mot qu'il a deviné à partir des indices
 
@@ -75,6 +84,10 @@ async function startGame(currentPlayer) {
             nb_points -= 2;
             console.log(`\nMauvaise réponse! Le mot était : ${motMystere} \nVotre score actuel est de ${nb_points} points.`);
         }
+
+        // Clear console after 3 seconds
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        clearConsole();
 
     } catch (error) {
         console.error("Une erreur est survenue :", error);  

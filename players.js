@@ -30,6 +30,7 @@ async function players(wordToGuess, player){
         console.log(`C'est au tour du ${players_playing[j]} de donner un indice`);
         let clue = await askClue();
         indices.push(clue);
+        process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
         };
     
     //rl.close();
