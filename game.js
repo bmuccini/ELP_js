@@ -7,24 +7,33 @@ const readline = require('readline').createInterface({
 const { creerCarte, mots } = require('./cards');
 const { players, verifIndices } = require('./players');
 
+
 // On initialise le nombre de points marqués.
 let nb_points = 0;
 
+
+// Utilisation de cette fonction pour synchroniser les input et output afin que le jeu ne se termine pas prématurément.
 const questionAsync = (question) => {
     return new Promise((resolve) => {
         readline.question(question, resolve);
     });
 };
 
-// Fonction principale
-async function startGame() {
-    try{
-        console.log("Le jeu JustOne est lancé !");
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
 
-        // Choisi un joueur random
-        const joueurs = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
-        const randomPlayer = joueurs[Math.floor(Math.random() * joueurs.length)];
-        console.log(`\nC'est au tour de ${randomPlayer} de deviner !`);
+
+// Fonction principale
+async function startGame(currentPlayer) {
+    try{
+
+        console.log("\n------------------------------------------");
+        console.log(`C'est au tour de ${currentPlayer} de deviner !`);
 
         // 2. Tire une carte qui a 5 mots aléatoires
         const card = creerCarte(mots); // Appel de la fonction pour obtenir une carte
@@ -44,7 +53,7 @@ async function startGame() {
 
 
         // 1. Récupérer les indices donnés par les autres joueurs
-        let indices = await players(motMystere, randomPlayer);
+        let indices = await players(motMystere, currentPlayer);
 
         // 2. Filtrer les indices en double
         let indicesFiltres = await verifIndices(indices);
@@ -54,7 +63,7 @@ async function startGame() {
 
         // 5. Input -- Demande au joueur le mot qu'il a deviné à partir des indices
 
-        const reponse = await questionAsync(`\nQuel mot avez vous deviné ${randomPlayer} ? (Pour passer votre tour, entrez "PASS") :\n`);
+        const reponse = await questionAsync(`\nQuel mot avez vous deviné ${currentPlayer} ? (Pour passer votre tour, entrez "PASS") :\n`);
 
         // Traitement de la réponse
         if (reponse.toUpperCase() === "PASS") {
@@ -72,7 +81,19 @@ async function startGame() {
     } 
 };
 
-// Pour démarrer le jeu
-startGame()
-    .catch(err => console.error(err))
-    .finally(() => readline.close()); // Close here, not in players.js
+async function main() {
+    const joueurs = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
+    const joueursMelanges = shuffleArray([...joueurs]);
+
+    console.log("Ordre des joueurs pour cette partie :", joueursMelanges.join(", "));
+    
+    for (const joueur of joueursMelanges) {
+        await startGame(joueur);
+    }
+    
+    console.log("\n=== Partie terminée ===");
+    console.log(`Score final : ${nb_points} points`);
+    readline.close();
+}
+
+main().catch(err => console.error(err));
