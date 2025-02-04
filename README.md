@@ -1,4 +1,4 @@
-#Projet Javascript : JustOne
+# Projet Javascript : JustOne
 
 ## Description:
 Ce projet est une implémentation du jeu de société Just One en JavaScript, jouable en ligne de commande.
