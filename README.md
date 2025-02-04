@@ -1,4 +1,4 @@
-# 🖌️ TC-LOGO : Projet Javascript : JustOne
+#Projet Javascript : JustOne
 
 ## Description:
 Ce projet est une implémentation du jeu de société Just One en JavaScript, jouable en ligne de commande.
@@ -20,7 +20,6 @@ Ce projet est une implémentation du jeu de société Just One en JavaScript, jo
 - Bonne réponse: +3 points
 - Mauvaise réponse: -2 points
 - Passer son tour: 0 point
-*A la fin du jeu, l'équipe doit avoir le score le plus haut possible.*
 
 ## Structure du Projet:
 - **game.js:**
