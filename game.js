@@ -52,21 +52,21 @@ async function startGame(currentPlayer) {
             return;
         }
 
-        // Affiche le mot correspondant à l'indice choisi
+        // 4. Affiche le mot correspondant à l'indice choisi
         const motMystere = card[parseInt(index)];
         console.log(`\nLe mot mystère est : ${motMystere}`);
 
 
-        // Récupérer les indices donnés par les autres joueurs
-        let indices = await players(motMystere, currentPlayer);
+        // 1. Récupérer les indices donnés par les autres joueurs
+        let indices = await players(currentPlayer);
 
-        // Filtrer les indices en double
+        // 2. Filtrer les indices en double
         let indicesFiltres = verifIndices(indices);
         
         // Clear console before showing filtered indices
         clearConsole();
 
-        // Afficher les indices finaux après filtrage
+        // 3. Afficher les indices finaux après filtrage
         console.log("\n------------------------------------------");
         console.log(`Tour de ${currentPlayer}`);
         console.log("\nIndices finaux après filtrage :", indicesFiltres);
@@ -87,7 +87,7 @@ async function startGame(currentPlayer) {
             console.log(`\nMauvaise réponse! Le mot était : ${motMystere} \nVotre score actuel est de ${nb_points} points.`);
         }
 
-        // Clear terminal après 3 secondes pour ne pas que les joueurs voient les indices précedemment donnés.
+        // Clear console after 3 seconds
         await new Promise(resolve => setTimeout(resolve, 3000));
         clearConsole();
 
