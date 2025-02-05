@@ -38,7 +38,7 @@ async function players(player){
 }
 
 //fonction asynchrone qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
-async function verifIndices (wordToGuess, clues) {
+async function verifIndices (clues) {
   let final_clues = [];
   let indexes = [];
   for (let i = 0; i < clues.length; i++){
