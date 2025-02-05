@@ -38,6 +38,10 @@ async function startGame(currentPlayer) {
         console.log("\n------------------------------------------");
         console.log(`C'est au tour de ${currentPlayer} de deviner !`);
 
+        // On attend 5 secondes après avoir indiqué quel joueur doit deviner afin qu'il ne voit pas la liste d'indices.
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        clearConsole();
+
         // Tire une carte qui a 5 mots aléatoires
         const card = creerCarte(mots); // Appel de la fonction pour obtenir une carte
         console.log("\nCartes tirées :", card.join(", "));
