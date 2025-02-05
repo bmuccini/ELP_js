@@ -5,14 +5,16 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+
 //fonction pour demander l'input d'un joueur
 function askClue(){
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     rl.question(`Quel est ton indice ? `, clue => {
       resolve(clue);
     });
   });
   }
+
 
 //fonction asynchrone pour demander aux joueurs à tour de role leur indice
 async function players(player){
@@ -32,8 +34,7 @@ async function players(player){
         indices.push(clue);
         process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
         };
-    
-    //rl.close();
+
     return indices;
 }
 
@@ -41,24 +42,25 @@ async function players(player){
 function verifIndices (clues) {
   let final_clues = [];
   let indexes = [];
+  // Les boucles for imbriquées suivantes permettent de comparer chaque élément de clues avec tous les autres éléments de clues afin de repérer les doublons.
   for (let i = 0; i < clues.length; i++){
     for (let j = 0; j < clues.length; j++){
-      if (i != j){
+      if (i != j){ // Pour ne pas comparer un indice avec lui-même.
         if (clues[i] == clues[j]){
-          indexes.push(i);
+          indexes.push(i); // On récupère les indexes des indices qui ont été proposés plusieurs fois.
         }
       }
     }
   }
   for (let p = 0; p < clues.length; p++){
-    if (!indexes.includes(p)){
-      final_clues.push(clues[p]);
+    if (!indexes.includes(p)){ // Si la liste indexes ne contient pas p.
+      final_clues.push(clues[p]); // On ajoute dans la liste d'incice finale les indices dont les indexes ne sont pas dans la liste indexes.
     }
   }
 
-  //console.log(`Les indices de tous les joueurs sont : ${final_clues}`);
   return final_clues;
 }
+
 
 module.exports = { players, verifIndices };
 
