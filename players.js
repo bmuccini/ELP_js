@@ -15,7 +15,7 @@ function askClue(){
   }
 
 //fonction asynchrone pour demander aux joueurs à tour de role leur indice
-async function players(wordToGuess, player){
+async function players(player){
     let indices = [];
     const players = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
     let players_playing = [];
@@ -37,9 +37,8 @@ async function players(wordToGuess, player){
     return indices;
 }
 
-//fonction auto executée qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
-async function verifIndices (clues) {
-  //let clues = await players("marron", "Joueur 1");
+//fonction asynchrone qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
+async function verifIndices (wordToGuess, clues) {
   let final_clues = [];
   let indexes = [];
   for (let i = 0; i < clues.length; i++){
