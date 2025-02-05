@@ -1,0 +1,20 @@
+{
+  "name": "just_one_game",
+  "version": "1.0.0",
+  "description": "An implementation of the game Just One",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node game.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmuccini/ELP_js.git"
+  },
+  "author": "MUCCINI Bianca, COLLET Marine, EL MOUKRI Yassmine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmuccini/ELP_js/issues"
+  },
+  "homepage": "https://github.com/bmuccini/ELP_js#readme"
+}
