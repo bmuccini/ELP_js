@@ -38,11 +38,11 @@ async function startGame(currentPlayer) {
         console.log("\n------------------------------------------");
         console.log(`C'est au tour de ${currentPlayer} de deviner !`);
 
-        // Tire une carte qui a 5 mots aléatoires
+        // 2. Tire une carte qui a 5 mots aléatoires
         const card = creerCarte(mots); // Appel de la fonction pour obtenir une carte
         console.log("\nCartes tirées :", card.join(", "));
 
-        // Input -- Demande au joueur de choisir un chiffre entre 0 et 4
+        // 3. Input -- Demande au joueur de choisir un chiffre entre 0 et 4
         const index = await questionAsync("Choisissez un chiffre entre 0 et 4 : ");// Input et index est une fonction de rappel ou callback, qui sera exécutée une fois que l'utilisateur aura saisi sa réponse
         
         if (isNaN(index) || index < 0 || index > 4) {  // Vérifie si l'entrée n'est pas un nombre et si le chiffre est entre 0 et 4
@@ -50,27 +50,27 @@ async function startGame(currentPlayer) {
             return;
         }
 
-        // Affiche le mot correspondant à l'indice choisi
+        // 4. Affiche le mot correspondant à l'indice choisi
         const motMystere = card[parseInt(index)];
         console.log(`\nLe mot mystère est : ${motMystere}`);
 
 
-        // Récupérer les indices donnés par les autres joueurs
-        let indices = await players(motMystere, currentPlayer);
+        // 1. Récupérer les indices donnés par les autres joueurs
+        let indices = await players(currentPlayer);
 
-        // Filtrer les indices en double
+        // 2. Filtrer les indices en double
         let indicesFiltres = verifIndices(indices);
         
         // Clear console before showing filtered indices
         clearConsole();
 
-        // Afficher les indices finaux après filtrage
+        // 3. Afficher les indices finaux après filtrage
         console.log("\n------------------------------------------");
         console.log(`Tour de ${currentPlayer}`);
         console.log("\nIndices finaux après filtrage :", indicesFiltres);
         
 
-        // Input -- Demande au joueur le mot qu'il a deviné à partir des indices
+        // 5. Input -- Demande au joueur le mot qu'il a deviné à partir des indices
 
         const reponse = await questionAsync(`\nQuel mot avez vous deviné ${currentPlayer} ? (Pour passer votre tour, entrez "PASS") :\n`);
 
@@ -85,7 +85,7 @@ async function startGame(currentPlayer) {
             console.log(`\nMauvaise réponse! Le mot était : ${motMystere} \nVotre score actuel est de ${nb_points} points.`);
         }
 
-        // Clear terminal après 3 secondes pour ne pas que les joueurs voient les indices précedemment donnés.
+        // Clear console after 3 seconds
         await new Promise(resolve => setTimeout(resolve, 3000));
         clearConsole();
 
