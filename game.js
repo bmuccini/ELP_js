@@ -6,7 +6,8 @@ const readline = require('readline').createInterface({
 // Importe la fonction creerCarte et la liste de mots depuis cards.js
 const { creerCarte, mots } = require('./cards');
 const { players, verifIndices } = require('./players');
-const questionAsync = (question) => {
+
+function questionAsync(question) {
     return new Promise((resolve) => {
         readline.question(question, resolve);
     });
@@ -58,7 +59,7 @@ async function startGame(currentPlayer) {
 
 
         // 1. Récupérer les indices donnés par les autres joueurs
-        let indices = await players(currentPlayer);
+        let indices = await players(currentPlayer,readline, questionAsync);
 
         // 2. Filtrer les indices en double
         let indicesFiltres = verifIndices(indices);

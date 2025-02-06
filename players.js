@@ -1,28 +1,19 @@
-const readline = require('node:readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-
-//fonction pour demander l'input d'un joueur
-function askClue(){
-  return new Promise((resolve) => {
-    rl.question(`Quel est ton indice ? `, clue => {
-      resolve(clue);
-    });
-  });
-  }
-
 
 //fonction asynchrone pour demander aux joueurs à tour de role leur indice
-async function players(player){
+async function players(player,readline, questionAsync){
     let indices = [];
     const players = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
-    let players_playing = [];
+    //let players_playing = [];
 
-    for (let i = 0; i < players.length; i++){
+    for (let player_playing in players){
+      if (player_playing != player){
+        console.log(`C'est au tour du ${player_playing} de donner un indice`);
+        let clue = await questionAsync("Quel est ton indice ?");
+        indices.push(clue);
+        process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
+      }
+    }
+    /*for (let i = 0; i < players.length; i++){
         if (players[i] != player) {
             players_playing.push(players[i]);
         }
@@ -33,7 +24,7 @@ async function players(player){
         let clue = await askClue();
         indices.push(clue);
         process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
-        };
+        };*/
 
     return indices;
 }
