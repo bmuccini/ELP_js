@@ -38,7 +38,11 @@ async function startGame(currentPlayer) {
         console.log(`C'est au tour de ${currentPlayer} de deviner !`);
 
         // On attend 5 secondes après avoir indiqué quel joueur doit deviner afin qu'il ne voit pas la liste d'indices.
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        //await new Promise(resolve => setTimeout(resolve, 5000));
+        //clearConsole();
+
+        // Demande au joueur d'appuyer sur "Enter" au lieu d'attendre 5 secondes
+        await questionAsync("Appuyez sur Entrée pour voir la carte");
         clearConsole();
 
         // Tire une carte qui a 5 mots aléatoires
@@ -89,7 +93,10 @@ async function startGame(currentPlayer) {
         }
 
         // Clear console after 3 seconds
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        //await new Promise(resolve => setTimeout(resolve, 3000));
+        //clearConsole();
+
+        await questionAsync("Appuyez sur Entrée pour passer au prochain tour");
         clearConsole();
 
     } catch (error) {
