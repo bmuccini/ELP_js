@@ -1,6 +1,6 @@
 
 //fonction asynchrone pour demander aux joueurs à tour de role leur indice
-async function players(player,readline, questionAsync){
+async function players(player,readline,questionAsync){
     let indices = [];
     const allPlayers = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
 
@@ -17,7 +17,7 @@ async function players(player,readline, questionAsync){
 }
 
 //fonction asynchrone qui affiche les indices finaux après avoir filtré les indices qui se ressemblent
-function verifIndices (clues) {
+function verifIndices (clues, motMystere) {
   let final_clues = [];
   let indexes = [];
   // Les boucles for imbriquées suivantes permettent de comparer chaque élément de clues avec tous les autres éléments de clues afin de repérer les doublons.
@@ -27,6 +27,9 @@ function verifIndices (clues) {
         if (clues[i] == clues[j]){
           indexes.push(i); // On récupère les indexes des indices qui ont été proposés plusieurs fois.
         }
+      }
+      if (clues[i]==motMystere){
+        indexes.push(i);
       }
     }
     if (!indexes.includes(i)){

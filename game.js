@@ -61,7 +61,7 @@ async function startGame(currentPlayer) {
         let indices = await players(currentPlayer,readline, questionAsync);
 
         // 3. Filtrer les indices en double
-        let indicesFiltres = verifIndices(indices);
+        let indicesFiltres = verifIndices(indices, motMystere);
         
         // Clear console before showing filtered indices
         clearConsole();
