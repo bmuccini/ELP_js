@@ -37,10 +37,6 @@ async function startGame(currentPlayer) {
         console.log("\n------------------------------------------");
         console.log(`C'est au tour de ${currentPlayer} de deviner !`);
 
-        // On attend 5 secondes après avoir indiqué quel joueur doit deviner afin qu'il ne voit pas la liste d'indices.
-        //await new Promise(resolve => setTimeout(resolve, 5000));
-        //clearConsole();
-
         // Demande au joueur d'appuyer sur "Enter" au lieu d'attendre 5 secondes
         await questionAsync("Appuyez sur Entrée pour voir la carte");
         clearConsole();
@@ -57,28 +53,25 @@ async function startGame(currentPlayer) {
             return;
         }
 
-        // 4. Affiche le mot correspondant à l'indice choisi
+        // 1. Affiche le mot correspondant à l'indice choisi
         const motMystere = card[parseInt(index)];
         console.log(`\nLe mot mystère est : ${motMystere}`);
 
-
-        // 1. Récupérer les indices donnés par les autres joueurs
+        // 2. Récupérer les indices donnés par les autres joueurs
         let indices = await players(currentPlayer,readline, questionAsync);
 
-        // 2. Filtrer les indices en double
+        // 3. Filtrer les indices en double
         let indicesFiltres = verifIndices(indices);
         
         // Clear console before showing filtered indices
         clearConsole();
 
-        // 3. Afficher les indices finaux après filtrage
+        // 4. Afficher les indices finaux après filtrage
         console.log("\n------------------------------------------");
         console.log(`Tour de ${currentPlayer}`);
         console.log("\nIndices finaux après filtrage :", indicesFiltres);
         
-
         // Demande au joueur le mot qu'il a deviné à partir des indices.
-
         const reponse = await questionAsync(`\nQuel mot avez vous deviné ${currentPlayer} ? (Pour passer votre tour, entrez "PASS") :\n`);
 
         // Traitement de la réponse
@@ -91,10 +84,6 @@ async function startGame(currentPlayer) {
             nb_points -= 2;
             console.log(`\nMauvaise réponse! Le mot était : ${motMystere} \nVotre score actuel est de ${nb_points} points.`);
         }
-
-        // Clear console after 3 seconds
-        //await new Promise(resolve => setTimeout(resolve, 3000));
-        //clearConsole();
 
         await questionAsync("Appuyez sur Entrée pour passer au prochain tour");
         clearConsole();

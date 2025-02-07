@@ -13,14 +13,5 @@ function creerCarte(listeMots) {
     return nouvelleListe;
 }
 
-/*
-for(let i = 0; i < 13; i++) {
-    let listeExtraite = creerCarte(mots);
-    console.log("Nouvelle liste de 5 mots :", listeExtraite);
-    console.log(mots.length)
-}
-*/
-
-
 // Exporter la fonction et la liste de mots
 module.exports = { creerCarte, mots };

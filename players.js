@@ -12,32 +12,8 @@ async function players(player,readline, questionAsync){
         console.log(`C'est au tour de ${player_playing} de donner un indice`);
         let clue = await questionAsync("Quel est ton indice ?");
         indices.push(clue);
-        process.stdout.write('\x1Bc'); // Effacer la console après chaque indice
     }
-
-/*
-    for (let player_playing in players){
-      if (player_playing != player){
-        console.log(`C'est au tour du ${player_playing} de donner un indice`);
-        let clue = await questionAsync("Quel est ton indice ?");
-        indices.push(clue);
-        process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
-      }
-    }*/
-
-
-    /*for (let i = 0; i < players.length; i++){
-        if (players[i] != player) {
-            players_playing.push(players[i]);
-        }
-    }
-
-    for (let j = 0; j < players_playing.length; j++){
-        console.log(`C'est au tour du ${players_playing[j]} de donner un indice`);
-        let clue = await askClue();
-        indices.push(clue);
-        process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
-        };*/
+    process.stdout.write('\x1Bc'); // Effacer la console après avoir donné tous les indices
 
     return indices;
 }
