@@ -11,9 +11,8 @@ async function players(player,readline, questionAsync){
         console.log(`C'est au tour de ${player_playing} de donner un indice`);
         let clue = await questionAsync("Quel est ton indice ?");
         indices.push(clue);
+        process.stdout.write('\x1Bc'); // Effacer la console après avoir donné tous les indices
     }
-    process.stdout.write('\x1Bc'); // Effacer la console après avoir donné tous les indices
-
     return indices;
 }
 
