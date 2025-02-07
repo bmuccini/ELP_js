@@ -2,9 +2,20 @@
 //fonction asynchrone pour demander aux joueurs à tour de role leur indice
 async function players(player,readline, questionAsync){
     let indices = [];
-    const players = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
+    const allPlayers = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
     //let players_playing = [];
 
+    //Exclure le joueur qui doit deviner
+    const players_playing = allPlayers.filter(p => p !== player);
+
+    for (let player_playing of players_playing) {
+        console.log(`C'est au tour de ${player_playing} de donner un indice`);
+        let clue = await questionAsync("Quel est ton indice ?");
+        indices.push(clue);
+        process.stdout.write('\x1Bc'); // Effacer la console après chaque indice
+    }
+
+/*
     for (let player_playing in players){
       if (player_playing != player){
         console.log(`C'est au tour du ${player_playing} de donner un indice`);
@@ -12,7 +23,9 @@ async function players(player,readline, questionAsync){
         indices.push(clue);
         process.stdout.write('\x1Bc'); // Pour que les joueurs ne puissent pas voir les indices donnés par les autres joueurs.
       }
-    }
+    }*/
+
+
     /*for (let i = 0; i < players.length; i++){
         if (players[i] != player) {
             players_playing.push(players[i]);
