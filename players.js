@@ -3,7 +3,6 @@
 async function players(player,readline, questionAsync){
     let indices = [];
     const allPlayers = ["Joueur 1", "Joueur 2", "Joueur 3", "Joueur 4", "Joueur 5"];
-    //let players_playing = [];
 
     //Exclure le joueur qui doit deviner
     const players_playing = allPlayers.filter(p => p !== player);
@@ -31,10 +30,8 @@ function verifIndices (clues) {
         }
       }
     }
-  }
-  for (let p = 0; p < clues.length; p++){
-    if (!indexes.includes(p)){ // Si la liste indexes ne contient pas p.
-      final_clues.push(clues[p]); // On ajoute dans la liste d'incice finale les indices dont les indexes ne sont pas dans la liste indexes.
+    if (!indexes.includes(i)){
+      final_clues.push(clues[i])
     }
   }
 
